@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="flex flex-center" color="secondary">
-      <img src="../assets/easy-eat-logo-white-tenedor.png">
+    <q-header elevated class="flex column flex-center" color="secondary">
+      <q-img src="../assets/easy-eat-logo-white-tenedor.png" style="max-width: 15%" class="q-ma-md"/>
       <p>Come sano en poco tiempo</p>
     </q-header>
 
@@ -19,10 +19,3 @@ export default defineComponent({
 
 });
 </script>
-
-<style scoped>
-  img{
-    width: 300px;
-    height: auto;
-  }
-</style>

@@ -8,7 +8,7 @@
             </q-toolbar-title>
             
             <q-btn dense round flat @click="toggleRightDrawer">
-               <q-avatar size="200px">
+               <q-avatar size="150px">
                     <div class="container-img">
                         <img src="../assets/ali.jpg" alt="User image" id="user-img">
                     </div>

@@ -23,8 +23,8 @@
         <q-toggle v-model="accept" label="I accept the license and terms"></q-toggle>
 
         <div class="flex flex-center">
-          <q-btn label="Log In" type="submit" color="primary"/>
-          <q-btn label="Sign Up" type="submit" color="primary"/>
+          <q-btn label="Log In" type="submit" color="primary" />
+          <q-btn label="Sign Up" type="submit" color="primary" class="q-ml-md"/>
         </div>
       </q-form>
     </div>
@@ -32,11 +32,49 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+  import { useQuasar } from 'quasar'
+  import { ref } from 'vue'
 
-export default defineComponent({
-  name: 'AuthenticationPage'
-});
+  export default {
+    setup () {
+      const $q = useQuasar()
+
+      const name = ref(null)
+      const age = ref(null)
+      const accept = ref(false)
+
+      return {
+        name,
+        age,
+        accept,
+
+        onSubmit () {
+          if (accept.value !== true) {
+            $q.notify({
+              color: 'red-5',
+              textColor: 'white',
+              icon: 'warning',
+              message: 'You need to accept the license and terms first'
+            })
+          }
+          else {
+            $q.notify({
+              color: 'green-4',
+              textColor: 'white',
+              icon: 'cloud_done',
+              message: 'Submitted'
+            })
+          }
+        },
+
+        onReset () {
+          name.value = null
+          age.value = null
+          accept.value = false
+        }
+      }
+    }
+  }
 </script>
 
 <style scoped>
@@ -44,5 +82,6 @@ export default defineComponent({
     border: solid 1px #26A69A;
     border-radius: 25px;
     padding: 2.5rem 1.5rem;
+    margin: 2rem;
   }
 </style>
