@@ -2,15 +2,15 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('src/layouts/AuthenticationLayout.vue'),
     children: [
-      { path: '', component: () => import('src/pages/AuthenticationPage.vue') },
-      
+      { path: '/signin', name: 'authentication', component: () => import('src/pages/SignInPage.vue') },
+      { path: '/signup', name: 'signup', component: () => import('src/pages/SignUpPage.vue') },
     ]
   },
   {
     path: '/home',
-    component: () => import('layouts/PageLayout.vue'),
+    component: () => import('src/layouts/MainLayout.vue'),
     children: [
       { path: '', name: 'home', component: () => import('../pages/HomePage.vue') },
       { path: '/menu', name: 'menu', component: () => import('../pages/MenuPage.vue') },
