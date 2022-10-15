@@ -3,7 +3,6 @@
     <div class="container">
       <q-form
         @submit.prevent="onSubmit"
-        @click="onSignUp"
         class="q-gutter-md"
       > 
       <q-item-label>Email *</q-item-label>
@@ -42,7 +41,6 @@
     setup () {
       const $q = useQuasar()
 
-      const accept = ref(false);
       const email = ref('');
       const password = ref('');
       const isPwd = ref(true);
@@ -54,13 +52,15 @@
       async function onSubmit() {
         try {
           await userStore.fetchUser() // here we call fetch user
-          if (!user.value) {
+          console.log(user.value.email);
+          console.log(email.value);
+          if (user.value.email === email.value) {
             // redirect them to logout if the user is not there
             // router.push({ path: '/' });
-            router.push({ path: '/signup' });
+            router.push({ path: '/home' });
           } else {
             // continue to dashboard
-            router.push({ path: '/home' });
+            router.push({ path: '/signup' });
           }
         } catch (e) {
           console.log(e)
@@ -87,7 +87,6 @@
         email,
         password,
         isPwd,
-        accept,
         onSubmit
       }
     }

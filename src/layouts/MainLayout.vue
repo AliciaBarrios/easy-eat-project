@@ -53,7 +53,7 @@
                 </q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple :to="{ name: 'authentication' }">
+            <q-item clickable v-ripple :to="{ name: 'landing' }">
                 <q-item-section avatar>
                     <q-icon name="power_settings_new" />
                 </q-item-section>

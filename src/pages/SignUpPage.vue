@@ -3,7 +3,6 @@
     <div class="container">
       <q-form
         @submit.prevent="onSubmit"
-        @click="onSignUp"
         class="q-gutter-lg"
       > 
           <p>Please fill in this form to create an account.</p>
@@ -130,26 +129,43 @@
     setup () {
       const $q = useQuasar()
 
-      const accept = ref(false);
       const username = ref('');
       const email = ref('');
       const password = ref('');
       const isPwd = ref(true);
       const repeatedPassword = ref('');
       const isPwd2 = ref(true);
-
-      const router = useRouter();
-      const userStore = useUserStore();
-      const { user } = storeToRefs(userStore);
       
       const isLength = ref(false);
       const isCapital = ref(false);
       const isNumber = ref(false);
       const isSymbol = ref(false);
+      const accept = ref(false);
+
+      const router = useRouter();
+      const userStore = useUserStore();
+      const { user } = storeToRefs(userStore);
     
       const validateEmail = (email) => {
         const regExEmail = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
         return regExEmail.test(email);
+      };
+
+      const validatePassword = (password) => {
+        // Test length
+        isLength.value = password.length >= 6;
+        // Test capital
+        isCapital.value = /^(?=.*[A-Z]).*$/.test(password);
+        // Test number
+        isNumber.value = /^(?=.*[0-9]).*$/.test(password);
+        // Test symbol
+        isSymbol.value = /^(?=.*[!@#$%^&*()\-_+=]).*$/.test(password);
+        return (
+          isLength.value &&
+          isCapital.value &&
+          isNumber.value &&
+          isSymbol.value
+        );
       };
 
       const validateTerms = computed(() => {
@@ -167,24 +183,8 @@
         }
       });
 
-      const validatePassword = (password) => {
-        isLength.value = password.length >= 6;
-        // Test capital
-        isCapital.value = /^(?=.*[A-Z]).*$/.test(password);
-        // Test number
-        isNumber.value = /^(?=.*[0-9]).*$/.test(password);
-        // Test symbol
-        isSymbol.value = /^(?=.*[!@#$%^&*()\-_+=]).*$/.test(password);
-        return (
-          isLength.value &&
-          isCapital.value &&
-          isNumber.value &&
-          isSymbol.value
-        );
-      };
-
       async function onSubmit() {
-        if (validatePassword.value  && validateTerms.value) {
+        if (validateTerms.value) {
           try {
             await userStore.fetchUser() // here we call fetch user
             if (!user.value) {
@@ -195,8 +195,9 @@
                 color: 'green-4',
                 textColor: 'white',
                 icon: 'cloud_done',
-                message: 'Congratulations! Please confirm your account in your email'
+                message: 'Thanks for registering! Please confirm your account in your email'
               });
+              router.push({ path: '/signin' }); // una vez confirmado te reedirecciona a la página de login
             } else {
               // continue to dashboard
               router.push({ path: '/signin' });
@@ -219,10 +220,10 @@
         isSymbol,
         isCapital,
         accept,
-        onSubmit,
         validateEmail,
         validatePassword,
-        validateTerms
+        validateTerms,
+        onSubmit
       }
     }
   }
@@ -236,6 +237,7 @@
     margin: 2em;
     width: 75%;
   }
+
   p {
     margin-top: 2rem;
     margin-bottom: 0;
