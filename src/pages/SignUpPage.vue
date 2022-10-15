@@ -220,9 +220,9 @@
         isCapital,
         accept,
         onSubmit,
+        validateEmail,
         validatePassword,
-        validateTerms,
-        validateEmail
+        validateTerms
       }
     }
   }
