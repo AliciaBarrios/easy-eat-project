@@ -1,7 +1,7 @@
 <template>
     <q-page padding>
-        <h1>Pantry</h1>
-        <div class="flex justify-center items-center">
+        <h2>Pantry</h2>
+        <div class="flex justify-evenly items-center">
           <q-input
           v-model="filter"
           filled
@@ -9,39 +9,24 @@
           class="width"
         >
           <template v-slot:append>
-            <q-btn flat rounded>
-              <q-icon name="search" />
-            </q-btn>
+            <q-icon name="search" />
           </template>
         </q-input>
-
-        <div class="q-pa-md">
-          <q-btn-dropdown color="primary" label="Sort">
-            <q-list>
-              <q-item clickable v-close-popup @click="sortByName">
-                <q-item-section>
-                  <q-item-label>By Name</q-item-label>
-                </q-item-section>
-              </q-item>
-
-              <q-item clickable v-close-popup @click="sortByCaducity">
-                <q-item-section>
-                  <q-item-label>By Caducity</q-item-label>
-                </q-item-section>
-              </q-item>
-
-              <q-item clickable v-close-popup @click="sortByQuantity">
-                <q-item-section>
-                  <q-item-label>By Quantity</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-btn-dropdown>
-        </div>
 
         <q-btn color="green" glossy @click="addIngredient">
           <q-icon name="add"/>
         </q-btn>
+
+        <div class="container flex justify-center">
+          <h6 class="q-mb-lg q-mt-sm">New ingredient</h6>
+          <div class="flex row justify-between">  
+            <q-input v-model="name" label="Name" :dense="dense" style="width: 45%;"/>
+            <q-input v-model="caducity" label="Caducity" placeholder="dd/mm/aaaa" :dense="dense" style="width: 45%;"/>
+            <q-input v-model="quantity" label="Quantity" :dense="dense" style="width: 45%;"/>
+            <q-select v-model="unit" :options="options" label="Unit" :dense="dense" style="width: 45%;"/>
+          </div>
+          <q-btn class="full-width q-mt-lg">Add</q-btn>
+        </div>
       </div>
       
       <div class="q-pa-md">
@@ -53,6 +38,7 @@
           row-key="name"
           :filter="filter"
           :sort-method="customSort"
+          binary-state-sort
         />
       </div>
     </q-page>
@@ -71,7 +57,7 @@
     format: val => `${val}`,
     sortable: true
   },
-  { name: 'quantity', align: 'center', label: 'Quantity', field: 'quantity', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
+  { name: 'quantity', align: 'center', label: 'Quantity', field: 'quantity', sortable: true },
   { name: 'units', label: 'Units', field: 'units', sortable: true },
   { name: 'caducity', label: 'Caducity', field: 'caducity', sortable: true },
 ]
@@ -146,6 +132,13 @@ const rows = [
       filter: ref(''),
       columns,
       rows,
+      name: ref(''),
+      caducity: ref(''),
+      quantity: ref(''),
+      model: ref(null),
+      options: [
+        'units', 'Kg', 'l', 'pack'
+      ],
 
       sortByName () {
         // console.log('Clicked on an Item')
@@ -181,7 +174,6 @@ const rows = [
             }
           })
         }
-
         return data
       }
     }
@@ -191,7 +183,13 @@ const rows = [
 
 <style scoped>
   .width {
-    width: 80%;
+    width: 85%;
+  }
+  .container {
+    max-width: 30%; 
+    border: 2px solid #26A69A;
+    border-radius: 15px;
+    padding: 2rem;
   }
 </style>
 
