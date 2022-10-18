@@ -53,7 +53,7 @@
                 </q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple :to="{ name: 'landing' }">
+            <q-item clickable v-ripple :to="{ name: 'landing' }" @click="userStore.signOut">
                 <q-item-section avatar>
                     <q-icon name="power_settings_new" />
                 </q-item-section>
@@ -85,6 +85,9 @@
 
 <script setup>
     import { ref } from 'vue'
+    import { useUserStore } from '../stores/user'
+
+    const userStore = useUserStore();
 
     const tab = ref('navbar');
 
@@ -98,9 +101,9 @@
 
 <style lang="scss">
   img{
-    width: 200px;
+    width: 150px;
     height: auto;
-    padding-top: 2rem;
+    padding-top: 1rem;
   }
 
   .container-img {

@@ -51,16 +51,17 @@
 
       async function onSubmit() {
         try {
-          await userStore.fetchUser() // here we call fetch user
+          await userStore.signIn(email.value, password.value);
+          await userStore.fetchUser();
           console.log(user.value.email);
           console.log(email.value);
-          if (user.value.email === email.value) {
+          if (!user.value) {
             // redirect them to logout if the user is not there
             // router.push({ path: '/' });
-            router.push({ path: '/home' });
+            router.push({ path: '/signup' });
           } else {
             // continue to dashboard
-            router.push({ path: '/signup' });
+            router.push({ path: '/home' });
           }
         } catch (e) {
           console.log(e)
