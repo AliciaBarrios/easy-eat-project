@@ -22,7 +22,7 @@
   import { useQuasar } from 'quasar'
   import { defineComponent } from 'vue'
   import DialogAddIngredient from '../components/DialogAddIngredient.vue'
-    import { watch } from 'vue'
+  import { watch } from 'vue'
 
   export default defineComponent({
     name: 'HeadPantry',

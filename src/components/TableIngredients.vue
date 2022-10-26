@@ -9,12 +9,36 @@
           :filter="filter"
           :sort-method="customSort"
           binary-state-sort
-        />
-      </div>
+        >
+            <template v-slot:body="props">
+                <q-tr :props="props">
+                    <q-td key="name" :props="props">
+                        {{ props.row.name }}
+                        <q-popup-edit v-model="props.row.name" title="Update name" buttons v-slot="scope">
+                        <q-input v-model="scope.value" dense autofocus counter />
+                        </q-popup-edit>
+                    </q-td>
+                    <q-td key="quantity" :props="props">
+                        {{ props.row.quantity }}
+                        <q-popup-edit v-model="props.row.quantity" title="Update quantity" buttons v-slot="scope">
+                        <q-input type="number" v-model="scope.value" dense autofocus />
+                        </q-popup-edit>
+                    </q-td>
+                    <q-td key="units" :props="props">
+                        <div class="text-pre-wrap">{{ props.row.units }}</div>
+                        <q-popup-edit v-model="props.row.units" title="Update units" buttons v-slot="scope">
+                        <q-select :options='options' v-model="scope.value" dense autofocus />
+                        </q-popup-edit>
+                    </q-td>
+                    <q-td key="caducity" :props="props">{{ props.row.caducity }}</q-td>
+                </q-tr>
+            </template>
+        </q-table>
+    </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 const columns = [
   {
@@ -35,13 +59,13 @@ const rows = [
   {
     name: 'Frozen Yogurt',
     quantity: 159,
-    units: 6.0,
+    units: 'Litres',
     caducity: 24
   },
   {
     name: 'Ice cream sandwich',
     quantity: 237,
-    units: 9.0,
+    units: 'Units',
     caducity: 37
   },
   {
@@ -94,11 +118,14 @@ const rows = [
   }
 ]
 
+const options = [
+        'Units', 'Kg', 'Litres', 'Pack'
+        ];
+
 export default defineComponent({
     props: { filter: String},
 
     setup (props) {
-
         const customSort = (rows, sortBy, descending) => {
             const data = [...rows]
 
@@ -120,12 +147,11 @@ export default defineComponent({
             return data
         }
 
-        console.log(props.filter);
-
         return {
         columns,
-        rows,
-        customSort
+        rows: ref(rows),
+        customSort,
+        options
         }
         }
     });
