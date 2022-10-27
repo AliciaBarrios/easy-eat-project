@@ -18,6 +18,9 @@
   import { defineComponent } from 'vue'
   import { useDialogPluginComponent } from 'quasar'
 
+  // import { useIngredientsStore } from '../stores/ingredients'
+  // import { storeToRefs } from 'pinia'
+
   export default defineComponent({
     name: 'DialogAddIngredient',
 
@@ -28,10 +31,6 @@
     ],
 
     setup() {
-      // const name = ref('');
-      // const caducity = ref('');
-      // const quantity = ref('');
-      // const unit = ref(null);
       const options = [
         'Units', 'Kg', 'Litres', 'Pack'
         ];
@@ -44,29 +43,22 @@
         caducity: null
       });
 
-      const rows = [];
+      // const ingredientsStore = useIngredientsStore();
+      // const { ingredients } = storeToRefs(ingredientsStore);
+      const rows = reactive([]);
 
       const { dialogRef, onDialogHide, onDialogOK } = useDialogPluginComponent();
 
       const onAddClick = () => {
-        // const row = {
-        //   name: name.value,
-        //   quantity: quantity.value,
-        //   unit: unit.value,
-        //   caducity: caducity.value
-        // }
         rows.push(row);
         onDialogOK()
-        console.log(rows);
+        // const store = useIngredientsStore();
+        // store.fetchIngredients();
       };
 
       
 
       return {
-        // name,
-        // caducity,
-        // quantity,
-        // unit,
         options,
         row,
         rows,

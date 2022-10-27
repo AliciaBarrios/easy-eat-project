@@ -120,7 +120,6 @@
 <script>
   import { useQuasar } from 'quasar'
   import { ref, computed } from 'vue'
-  // import { onMounted } from 'vue'
   import { storeToRefs } from 'pinia'
   import { useRouter } from 'vue-router'
   import { useUserStore } from '../stores/user'
