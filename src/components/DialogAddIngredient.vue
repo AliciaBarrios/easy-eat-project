@@ -4,7 +4,7 @@
         <h6 class="q-mb-lg q-mt-sm">New ingredient</h6>
         <div class="flex row justify-between">  
           <q-input v-model="row.name" label="Name" style="width: 45%;"/>
-          <q-input v-model="row.caducity" label="Caducity" placeholder="aaaa/mm/dd" style="width: 45%;"> 
+          <q-input v-model="row.caducity" label="Caducity" placeholder="aaaa/mm/dd" mask="date" style="width: 45%;"> 
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import { reactive, ref } from 'vue'
+  import { reactive } from 'vue'
   import { defineComponent } from 'vue'
   import { useDialogPluginComponent } from 'quasar'
   import { useIngredientsStore } from '../stores/ingredients'

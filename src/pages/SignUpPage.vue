@@ -196,7 +196,7 @@
                 icon: 'cloud_done',
                 message: 'Thanks for registering! Please confirm your account in your email'
               });
-              router.push({ path: '/signin' }); // una vez confirmado te reedirecciona a la página de login
+              // router.push({ path: '/signin' }); // una vez confirmado te reedirecciona a la página de login
             } else {
               // continue to dashboard
               router.push({ path: '/signin' });

@@ -4,10 +4,10 @@
             <q-card-section>
                 <div class="text-h6 q-mb-xs">What are we eating today?</div>
             </q-card-section>
-            <img src="../assets/thinking.png">
+            <img src="../assets/comida.jpg">
         </q-card>
         <q-card class="my-card flex flex-center">
-            <img src="../assets/thinking.png">
+            <img src="../assets/calendario.jpg">
             <q-card-section>
                 <div class="text-h6 q-mb-xs">It's the end of the month and it's time to do the monthly shopping again?</div>
             </q-card-section>
@@ -16,7 +16,7 @@
             <q-card-section>
                 <div class="text-h6 q-mb-xs">Oh, man! Now I can't remember if we have any milk left at home.</div>
             </q-card-section>
-            <img src="../assets/thinking.png">
+            <img src="../assets/leche.jpg">
         </q-card>
     </div>
 
@@ -67,12 +67,14 @@
 
 <style scoped>
     img {
-        width: 200px;
+        width: 400px;
         height: auto;
+        margin: 0;
     }
 
     .my-card {
         width: 20%;
+        height: 400px;
     }
 
     .container {
