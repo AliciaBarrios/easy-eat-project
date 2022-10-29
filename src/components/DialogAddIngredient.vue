@@ -3,23 +3,22 @@
     <q-card class="q-dialog-plugin q-pa-xl">
         <h6 class="q-mb-lg q-mt-sm">New ingredient</h6>
         <div class="flex row justify-between">  
-          <q-input v-model="name" label="Name" style="width: 45%;"/>
-          <q-input v-model="date" label="Caducity"  mask="####-##-##" placeholder="aaaa-mm-dd" style="width: 45%;"> 
+          <q-input v-model="row.name" label="Name" style="width: 45%;"/>
+          <q-input v-model="row.caducity" label="Caducity" placeholder="aaaa/mm/dd" style="width: 45%;"> 
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                  <q-date v-model="date">
+                  <q-date v-model="row.caducity">
                     <div class="row items-center justify-end">
-                      <q-btn v-close-popup label="Close" color="primary" flat />
+                      <q-btn v-close-popup label="Done" color="primary" flat />
                     </div>
                   </q-date>
                 </q-popup-proxy>
               </q-icon>
             </template>
           </q-input>
-
-          <q-input v-model="quantity" label="Quantity" style="width: 45%;"/>
-          <q-select v-model="unit" :options="options" label="Unit" style="width: 45%;"/>
+          <q-input v-model="row.quantity" label="Quantity" style="width: 45%;"/>
+          <q-select v-model="row.unit" :options="options" label="Unit" style="width: 45%;"/>
         </div>
         <q-btn class="full-width q-mt-lg" color="primary" @click="onAddClick">Add</q-btn>
     </q-card>
@@ -27,7 +26,7 @@
 </template>
 
 <script>
-  import { ref } from 'vue'
+  import { reactive, ref } from 'vue'
   import { defineComponent } from 'vue'
   import { useDialogPluginComponent } from 'quasar'
   import { useIngredientsStore } from '../stores/ingredients'
@@ -48,19 +47,15 @@
         'Units', 'Kg', 'Litres', 'Pack'
         ];
 
-      const name = ref('');
-      const quantity= ref('');
-      const unit= ref('');
-      const caducity = ref('');
-      
-      // const date = '';
-     
-      // const row = reactive({
-      //   name: '',
-      //   quantity: '',
-      //   unit: '',
-      //   caducity: '',
-      // });
+      const row = reactive({
+        name: '',
+        quantity: '',
+        unit: '',
+        caducity: '',
+      });
+
+      //modificación para cuadrar formato fecha supabase
+      row.caducity.replace('/','-');
 
       const ingredientStore = useIngredientsStore();
       const { ingredients } = storeToRefs(ingredientStore);
@@ -68,13 +63,11 @@
       const userStore = useUserStore();
       const { user } = storeToRefs(userStore);
 
-      // const rows = reactive([]);
-
       const { dialogRef, onDialogHide, onDialogOK } = useDialogPluginComponent();
       
       const newIngredient = async() => {
           await userStore.fetchUser();
-          await ingredientStore.insertIngredient(user.value.id, name, quantity, unit, caducity);
+          await ingredientStore.insertIngredient(user.value.id, row.name, row.quantity, row.unit, row.caducity);
           await ingredientStore.fetchIngredients();
       }
 
@@ -86,19 +79,13 @@
 
       return {
         options,
-        // row,
-        // rows,
+        row,
         dialogRef,
         onDialogHide,
         onAddClick,
         newIngredient,
         ingredients,
         user,
-        name,
-        quantity,
-        caducity,
-        unit,
-        date: ref(''),
       }
     },
   });
