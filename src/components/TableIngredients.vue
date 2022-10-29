@@ -14,20 +14,26 @@
                 <q-tr :props="ingredients">
                     <q-td key="name" :props="ingredients">
                         {{ ingredients.row.name }}
-                        <q-popup-edit v-model="ingredients.row.name" title="Update name" buttons v-slot="scope">
-                        <q-input v-model="scope.value" dense autofocus counter />
+                        <q-popup-edit v-model="ingredients.row.name" title="Update name" v-slot="scope">
+                          <q-input v-model="scope.value" dense autofocus counter />
+                          <q-btn flat color="primary" class="q-mt-md" label="Save" @click="updateName(scope.value, ingredients.row.id)" v-close-popup/>
+                          <q-btn type="" flat color="primary" class="q-mt-md" label="Close" v-close-popup/>
                         </q-popup-edit>
                     </q-td>
                     <q-td key="quantity" :props="ingredients">
                         {{ ingredients.row.quantity }}
-                        <q-popup-edit v-model="ingredients.row.quantity" title="Update quantity" buttons v-slot="scope">
-                        <q-input type="number" v-model="scope.value" dense autofocus />
+                        <q-popup-edit v-model="ingredients.row.quantity" title="Update quantity" v-slot="scope">
+                          <q-input type="number" v-model="scope.value" dense autofocus />
+                          <q-btn flat color="primary" class="q-mt-md" label="Save" @click="updateQuantity(scope.value, ingredients.row.id)" v-close-popup/>
+                          <q-btn type="" flat color="primary" class="q-mt-md" label="Close" v-close-popup/>
                         </q-popup-edit>
                     </q-td>
                     <q-td key="unit" :props="ingredients">
                         <div class="text-pre-wrap">{{ ingredients.row.unit }}</div>
-                        <q-popup-edit v-model="ingredients.row.unit" title="Update units" buttons v-slot="scope">
-                        <q-select :options='options' v-model="scope.value" dense autofocus />
+                        <q-popup-edit v-model="ingredients.row.unit" title="Update units" v-slot="scope">
+                          <q-select :options='options' v-model="scope.value" dense autofocus />
+                          <q-btn flat color="primary" class="q-mt-md" label="Save" @click="updateUnit(scope.value, ingredients.row.id)" v-close-popup/>
+                          <q-btn type="" flat color="primary" class="q-mt-md" label="Close" v-close-popup/>
                         </q-popup-edit>
                     </q-td>
                     <q-td key="caducity" :props="ingredients">{{ ingredients.row.caducity }}</q-td>
@@ -117,19 +123,47 @@ export default defineComponent({
           } catch (error) {
             console.log('error', error);
           }
-          console.log('ingredientID', ingredientId)
+        }
+
+        const updateName = async(newItem, ingredientId) => {
+          try {
+            await ingredientStore.updateNameIngredient(newItem, ingredientId);
+            await ingredientStore.fetchIngredients();
+          } catch (error) {
+            console.log('error', error);
+          }
+        }
+
+        const updateQuantity = async(newItem, ingredientId) => {
+          try {
+            await ingredientStore.updateQuantityIngredient(newItem, ingredientId);
+            await ingredientStore.fetchIngredients();
+          } catch (error) {
+            console.log('error', error);
+          }
+        }
+
+        const updateUnit = async(newItem, ingredientId) => {
+          try {
+            await ingredientStore.updateUnitIngredient(newItem, ingredientId);
+            await ingredientStore.fetchIngredients();
+          } catch (error) {
+            console.log('error', error);
+          }
         }
 
         console.log('ingredients2:', ingredients);
-        // console.log('rows:', rows);
 
         return {
           columns,
           // rows: reactive(rows),
-          customSort,
           options,
           ingredients,
+          customSort,
           removeIngredient,
+          updateName,
+          updateQuantity,
+          updateUnit
         }
       }
     });

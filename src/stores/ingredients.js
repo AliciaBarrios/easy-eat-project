@@ -29,8 +29,34 @@ export const useIngredientsStore = defineStore('ingredients', {
     async deleteIngredient (id) {
       const { data: ingredients, error } = await supabase
         .from('ingredients')
-
         .delete()
+        .eq('id', id)
+      if (error) throw error;
+      this.ingredients = ingredients;
+    },
+
+    async updateNameIngredient (newItem, id) {
+      const { data: ingredients, error } = await supabase
+        .from('ingredients')
+        .update({ name: newItem })
+        .eq('id', id)
+      if (error) throw error;
+      this.ingredients = ingredients;
+    },
+
+    async updateQuantityIngredient (newItem, id) {
+      const { data: ingredients, error } = await supabase
+        .from('ingredients')
+        .update({ quantity: newItem })
+        .eq('id', id)
+      if (error) throw error;
+      this.ingredients = ingredients;
+    },
+
+    async updateUnitIngredient (newItem, id) {
+      const { data: ingredients, error } = await supabase
+        .from('ingredients')
+        .update({ unit: newItem })
         .eq('id', id)
       if (error) throw error;
       this.ingredients = ingredients;
@@ -38,3 +64,4 @@ export const useIngredientsStore = defineStore('ingredients', {
   }
 });
 
+  
