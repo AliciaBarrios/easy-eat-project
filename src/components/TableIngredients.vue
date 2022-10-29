@@ -38,7 +38,7 @@
                         color="red"
                         glossy
                         push
-                        @click="removeIngredient">
+                        @click="removeIngredient(ingredients.row.id)">
                         <q-icon name='remove_circle_outline'></q-icon>
                       </q-btn>
                     </div>
@@ -91,7 +91,7 @@ export default defineComponent({
                 const x = descending ? b : a
                 const y = descending ? a : b
 
-                if (sortBy === 'name') {
+                if (sortBy === 'name' || sortBy === 'unit') {
                 // string sort
                 return x[ sortBy ] > y[ sortBy ] ? 1 : x[ sortBy ] < y[ sortBy ] ? -1 : 0
                 }
@@ -110,16 +110,27 @@ export default defineComponent({
 
         fetchIngredients();
 
+        const removeIngredient = async(ingredientId) => {
+          try {
+            await ingredientStore.deleteIngredient(ingredientId);
+            await ingredientStore.fetchIngredients();
+          } catch (error) {
+            console.log('error', error);
+          }
+          console.log('ingredientID', ingredientId)
+        }
+
         console.log('ingredients2:', ingredients);
         // console.log('rows:', rows);
 
         return {
-        columns,
-        // rows: reactive(rows),
-        customSort,
-        options,
-        ingredients
+          columns,
+          // rows: reactive(rows),
+          customSort,
+          options,
+          ingredients,
+          removeIngredient,
         }
-        }
+      }
     });
 </script>

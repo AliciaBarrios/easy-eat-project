@@ -26,12 +26,12 @@ export const useIngredientsStore = defineStore('ingredients', {
       this.ingredients = ingredients;
     },
 
-    async deleteIngredient (e) {
+    async deleteIngredient (id) {
       const { data: ingredients, error } = await supabase
         .from('ingredients')
 
         .delete()
-        .eq('id', e)
+        .eq('id', id)
       if (error) throw error;
       this.ingredients = ingredients;
     }
