@@ -4,7 +4,7 @@
         <h6 class="q-mb-lg q-mt-sm">New ingredient</h6>
         <div class="flex row justify-between">  
           <q-input v-model="row.name" label="Name" style="width: 45%;"/>
-          <q-input v-model="row.caducity" label="Caducity" placeholder="dd/mm/aaaa" style="width: 45%;"/>
+          <q-input v-model="row.caducity" label="Caducity" placeholder="aaaa-mm-dd" style="width: 45%;"/>
           <q-input v-model="row.quantity" label="Quantity" style="width: 45%;"/>
           <q-select v-model="row.unit" :options="options" label="Unit" style="width: 45%;"/>
         </div>
@@ -17,9 +17,9 @@
   import { reactive } from 'vue'
   import { defineComponent } from 'vue'
   import { useDialogPluginComponent } from 'quasar'
-
-  // import { useIngredientsStore } from '../stores/ingredients'
-  // import { storeToRefs } from 'pinia'
+  import { useIngredientsStore } from '../stores/ingredients'
+  import { useUserStore } from '../stores/user'
+  import { storeToRefs } from 'pinia'
 
   export default defineComponent({
     name: 'DialogAddIngredient',
@@ -43,20 +43,27 @@
         caducity: null
       });
 
-      // const ingredientsStore = useIngredientsStore();
-      // const { ingredients } = storeToRefs(ingredientsStore);
+      const ingredientStore = useIngredientsStore();
+      const { ingredients } = storeToRefs(ingredientStore);
+
+      const userStore = useUserStore();
+      const { user } = storeToRefs(userStore);
+
       const rows = reactive([]);
 
       const { dialogRef, onDialogHide, onDialogOK } = useDialogPluginComponent();
+      
+      const newIngredient = async() => {
+          await userStore.fetchUser();
+          await ingredientStore.insertIngredient(user.value.id, row.name, row.quantity, row.unit, row.caducity);
+          await ingredientStore.fetchIngredients();
+      }
 
       const onAddClick = () => {
-        rows.push(row);
+        newIngredient()
         onDialogOK()
-        // const store = useIngredientsStore();
-        // store.fetchIngredients();
+        console.log(user.value.id)
       };
-
-      
 
       return {
         options,
@@ -64,7 +71,10 @@
         rows,
         dialogRef,
         onDialogHide,
-        onAddClick
+        onAddClick,
+        newIngredient,
+        ingredients,
+        user
       }
     },
   });

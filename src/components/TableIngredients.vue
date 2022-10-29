@@ -10,44 +10,55 @@
           :sort-method="customSort"
           binary-state-sort
         >
-            <template v-slot:body="props">
-                <q-tr :props="props">
-                    <q-td key="name" :props="props">
-                        {{ props.row.name }}
-                        <q-popup-edit v-model="props.row.name" title="Update name" buttons v-slot="scope">
+            <template v-slot:body="ingredients">
+                <q-tr :props="ingredients">
+                    <q-td key="name" :props="ingredients">
+                        {{ ingredients.row.name }}
+                        <q-popup-edit v-model="ingredients.row.name" title="Update name" buttons v-slot="scope">
                         <q-input v-model="scope.value" dense autofocus counter />
                         </q-popup-edit>
                     </q-td>
-                    <q-td key="quantity" :props="props">
-                        {{ props.row.quantity }}
-                        <q-popup-edit v-model="props.row.quantity" title="Update quantity" buttons v-slot="scope">
+                    <q-td key="quantity" :props="ingredients">
+                        {{ ingredients.row.quantity }}
+                        <q-popup-edit v-model="ingredients.row.quantity" title="Update quantity" buttons v-slot="scope">
                         <q-input type="number" v-model="scope.value" dense autofocus />
                         </q-popup-edit>
                     </q-td>
-                    <q-td key="unit" :props="props">
-                        <div class="text-pre-wrap">{{ props.row.unit }}</div>
-                        <q-popup-edit v-model="props.row.unit" title="Update units" buttons v-slot="scope">
+                    <q-td key="unit" :props="ingredients">
+                        <div class="text-pre-wrap">{{ ingredients.row.unit }}</div>
+                        <q-popup-edit v-model="ingredients.row.unit" title="Update units" buttons v-slot="scope">
                         <q-select :options='options' v-model="scope.value" dense autofocus />
                         </q-popup-edit>
                     </q-td>
-                    <q-td key="caducity" :props="props">{{ props.row.caducity }}</q-td>
+                    <q-td key="caducity" :props="ingredients">{{ ingredients.row.caducity }}</q-td>
+
+                    <div style="margin-top: 10px; padding-bottom: 15px;" class="flex justify-center items-center">
+                      <q-btn
+                        
+                        color="red"
+                        glossy
+                        push
+                        @click="removeIngredient">
+                        <q-icon name='remove_circle_outline'></q-icon>
+                      </q-btn>
+                    </div>
                 </q-tr>
             </template>
         </q-table>
 
     </div>
-    
+
 </template>
 
 <script>
-import { defineComponent, reactive, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 
 import { useIngredientsStore } from '../stores/ingredients'
 import { storeToRefs } from 'pinia'
 
 const ingredientStore = useIngredientsStore();
 const { ingredients } = storeToRefs(ingredientStore);
-const rows = [];
+// const rows = [];
 
 const columns = [
   {
@@ -95,22 +106,19 @@ export default defineComponent({
       
         const fetchIngredients = async() => {
           await ingredientStore.fetchIngredients();
-          console.log(ingredients, "#### Esto es el fetch")
-          // rows = ingredients;
         }
 
         fetchIngredients();
 
         console.log('ingredients2:', ingredients);
-        console.log('rows:', rows);
+        // console.log('rows:', rows);
 
         return {
         columns,
-        rows: reactive(rows),
+        // rows: reactive(rows),
         customSort,
         options,
-        // getTable,
-        ingredients,
+        ingredients
         }
         }
     });

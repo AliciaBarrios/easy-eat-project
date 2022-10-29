@@ -10,9 +10,30 @@ export const useIngredientsStore = defineStore('ingredients', {
       const { data: ingredients } = await supabase
         .from('ingredients')
         .select('*')
-        .order('id', { ascending: false });
+        .order('name', { ascending: true });
       this.ingredients = ingredients;
       // console.log("ingredients:", this.ingredients);
+    },
+
+    async insertIngredient (user, name, quantity, unit, caducity) {
+      const { data: ingredients, error } = await supabase
+        .from('ingredients')
+        .insert([
+          { user_id: user, name: name, quantity: quantity, unit: unit, caducity: caducity  },
+        ])
+        .select('*')
+      if (error) throw error;
+      this.ingredients = ingredients;
+    },
+
+    async deleteIngredient (e) {
+      const { data: ingredients, error } = await supabase
+        .from('ingredients')
+
+        .delete()
+        .eq('id', e)
+      if (error) throw error;
+      this.ingredients = ingredients;
     }
   }
 });
