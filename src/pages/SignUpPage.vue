@@ -5,10 +5,10 @@
         @submit.prevent="onSubmit"
         class="q-gutter-lg"
       > 
-          <p>Please fill in this form to create an account.</p>
+        <p>Please fill in this form to create an account.</p>
      
-        <div class="row q-gutter-md">
-          <div class="col q-gutter-md">
+        <div class="display-direction q-gutter-sm">
+          <div class="col q-gutter-md q-mr-lg q-mb-md">
             <q-item-label>Username *</q-item-label>
             <q-input 
             rounded outlined 
@@ -19,7 +19,7 @@
             >
             </q-input>
           </div>
-          <div class="col q-gutter-md">
+          <div class="col q-gutter-md q-mr-lg">
             <q-item-label>Email *</q-item-label>
             <q-input 
             rounded outlined 
@@ -32,8 +32,8 @@
           </div>
         </div>
         
-        <div class="row q-gutter-md">
-          <div class="col q-gutter-md">
+        <div class="display-direction q-gutter-sm">
+          <div class="col q-gutter-md q-mr-lg q-mb-md">
             <q-item-label>Password *</q-item-label>
             <q-input 
             rounded outlined 
@@ -50,41 +50,8 @@
                   ></q-icon>
                 </template>
             </q-input>
-          
-            <div class="password-criteria q-pa-sm">
-              <div class="text-subtitle2 q-mb-sm">Password Criteria:</div>
-                <div>
-                  <q-icon
-                    :name="isLength ? 'check_circle' : 'cancel'"
-                    :color="isLength ? 'positive' : 'negative'"
-                  ></q-icon>
-                  Must be at least 12 characters long.
-                </div>
-                <div>
-                  <q-icon
-                    :name="isCapital ? 'check_circle' : 'cancel'"
-                    :color="isCapital ? 'positive' : 'negative'"
-                  ></q-icon>
-                  Must contain at least one capital letter.
-                </div>
-                <div>
-                  <q-icon
-                    :name="isNumber ? 'check_circle' : 'cancel'"
-                    :color="isNumber ? 'positive' : 'negative'"
-                  ></q-icon>
-                  Must contain at least one number.
-                </div>
-                <div>
-                  <q-icon
-                    :name="isSymbol ? 'check_circle' : 'cancel'"
-                    :color="isSymbol ? 'positive' : 'negative'"
-                  ></q-icon>
-                  Must contain at least one special character: !@#$%^&*()-_+=
-                </div>
-            </div>
           </div>
-
-          <div class="col q-gutter-md">
+          <div class="col q-gutter-md q-mr-lg">
             <q-item-label>Repeat Password *</q-item-label>
             <q-input 
               rounded outlined 
@@ -102,6 +69,38 @@
                 </template>
             </q-input>
           </div>
+        </div>
+
+        <div class="password-criteria q-pa-sm">
+          <div class="text-subtitle2 q-mb-sm">Password Criteria:</div>
+            <div>
+              <q-icon
+                :name="isLength ? 'check_circle' : 'cancel'"
+                :color="isLength ? 'positive' : 'negative'"
+              ></q-icon>
+              Must be at least 12 characters long.
+            </div>
+            <div>
+              <q-icon
+                :name="isCapital ? 'check_circle' : 'cancel'"
+                :color="isCapital ? 'positive' : 'negative'"
+              ></q-icon>
+              Must contain at least one capital letter.
+            </div>
+            <div>
+              <q-icon
+                :name="isNumber ? 'check_circle' : 'cancel'"
+                :color="isNumber ? 'positive' : 'negative'"
+              ></q-icon>
+              Must contain at least one number.
+            </div>
+            <div>
+              <q-icon
+                :name="isSymbol ? 'check_circle' : 'cancel'"
+                :color="isSymbol ? 'positive' : 'negative'"
+              ></q-icon>
+              Must contain at least one special character: !@#$%^&*()-_+=
+            </div>
         </div>
 
         <p>By creating an account you agree to our Terms & Privacy</p>
@@ -190,16 +189,18 @@
               // redirect them to logout if the user is not there
               // router.push({ path: '/' });
               await userStore.signUp(email.value, password.value);
+             
               $q.notify({
                 color: 'green-4',
                 textColor: 'white',
                 icon: 'cloud_done',
                 message: 'Thanks for registering! Please confirm your account in your email'
               });
-              // router.push({ path: '/signin' }); // una vez confirmado te reedirecciona a la página de login
+              router.push({ path: '/confirmation' }); 
+              
             } else {
               // continue to dashboard
-              router.push({ path: '/signin' });
+              router.push({ path: '/home' });
             }
           } catch (e) {
             console.log(e)
@@ -246,4 +247,19 @@
   border-radius: 0.5rem;
 
   }
+
+  @media only screen and (max-width: 600px) {
+    .display-direction {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  @media only screen and (min-width: 601px) {
+    .display-direction {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  
 </style>

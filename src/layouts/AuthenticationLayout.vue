@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated color="secondary">
       <div class="flex column flex-center q-pa-md" >
-        <q-img src="../assets/easy-eat-logo-white-tenedor.png" style="max-width: 8%" class="q-pa-xl" />
+        <q-img src="../assets/easy-eat-logo-white-tenedor.png" id="logo"/>
         <p class="text-italic q-pt-md">Everything starts in your pantry</p>
       </div>
       <q-tabs    
@@ -21,6 +21,17 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <q-footer elevated class="bg-grey-8 text-white">
+      <q-toolbar>
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+          <div>Title</div>
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-footer>
   </q-layout>
 </template>
 
@@ -44,5 +55,28 @@
     font-size: 20px;
     letter-spacing: 3px;
     font-family: 'Life Savers', cursive;
+    text-align: center;
+  }
+
+  #logo {
+    max-width: 50%;
+  }
+
+  @media only screen and (min-width: 600px) {
+    #logo {
+    max-width: 35%;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    #logo {
+    max-width: 20%;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    #logo {
+    max-width: 15%;
+    }
   }
 </style>

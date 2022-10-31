@@ -65,6 +65,12 @@
           }
         } catch (e) {
           console.log(e)
+          $q.notify({
+                color: 'red-4',
+                textColor: 'white',
+                icon: 'error_outline',
+                message: e.message,
+              });
         }
       }
  

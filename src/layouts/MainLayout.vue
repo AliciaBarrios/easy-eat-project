@@ -21,14 +21,13 @@
         v-model="tab"
         dense
         align="justify"
-        class="bg-primary text-white"
+        class="bg-primary text-white desktop-only"
         :breakpoint="0"
         >
           <q-route-tab :to="{ name: 'menu'}" label="Menu" />
           <q-route-tab :to="{ name: 'despensa'}" label="Despensa" />
           <q-route-tab :to="{ name: 'recetario'}" label="Recetario" />
         </q-tabs>
-
       </q-header>
   
       <q-drawer v-model="rightDrawerOpen" side="right" behavior="desktop" elevated>
@@ -69,17 +68,19 @@
         <router-view />
       </q-page-container>
 
-    <q-footer elevated class="bg-grey-8 text-white">
-      <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-          </q-avatar>
-          <div>Title</div>
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-footer>
-
+      <q-footer>
+        <q-tabs    
+          v-model="tab"
+          dense
+          align="justify"
+          class="bg-primary text-white mobile-only"
+          :breakpoint="0"
+          >
+            <q-route-tab :to="{ name: 'menu'}" icon="restaurant" label="Menu" />
+            <q-route-tab :to="{ name: 'despensa'}" icon="icecream" label="Despensa" />
+            <q-route-tab :to="{ name: 'recetario'}" icon="menu_book" label="Recetario" />
+        </q-tabs>
+      </q-footer>
   </q-layout>
 </template>
 
