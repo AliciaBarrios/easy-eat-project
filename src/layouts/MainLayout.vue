@@ -23,7 +23,7 @@
       align="justify"
       class="bg-primary text-white desktop-only"
       :breakpoint="0"
-      v-if="$q.screen.gt.md"
+      v-if="$q.screen.gt.xs"
       >
         <q-route-tab :to="{ name: 'menu'}" label="Menu" />
         <q-route-tab :to="{ name: 'despensa'}" label="Despensa" />

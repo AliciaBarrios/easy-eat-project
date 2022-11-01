@@ -11,7 +11,7 @@
         align="justify"
         class="bg-primary text-white"
         :breakpoint="0"
-        v-if="$q.screen.gt.md"
+        v-if="$q.screen.gt.xs"
         >
           <q-route-tab :to="{ name: 'landing'}" label="ABOUT US" />
           <q-route-tab :to="{ name: 'signup'}" label="SIGN UP" />
