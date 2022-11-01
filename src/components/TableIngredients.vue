@@ -39,7 +39,7 @@
           <q-td key="caducity" :props="ingredients">{{ ingredients.row.caducity }}</q-td>
           <div style="margin-top: 10px; padding-bottom: 10px;" class="flex justify-center items-center">
             <q-btn
-              :glossy="$q.screen.gt.md"
+              :glossy="$q.screen.gt.xs"
               :flat="$q.screen.xs"
               class="button"
               size="md"
