@@ -1,59 +1,65 @@
 <template>
   <div class="q-pa-md">
-        <q-table
-          :dense="$q.screen.lt.md"
-          title="Ingredients"
-          :rows="ingredients || []"
-          :columns="columns"
-          row-key="name"
-          :filter="filter"
-          :sort-method="customSort"
-          binary-state-sort
-        >
-            <template v-slot:body="ingredients">
-                <q-tr :props="ingredients">
-                    <q-td key="name" :props="ingredients">
-                        {{ ingredients.row.name }}
-                        <q-popup-edit v-model="ingredients.row.name" title="Update name" v-slot="scope">
-                          <q-input v-model="scope.value" dense autofocus counter />
-                          <q-btn flat color="primary" class="q-mt-md" label="Save" @click="updateName(scope.value, ingredients.row.id)" v-close-popup/>
-                          <q-btn type="" flat color="primary" class="q-mt-md" label="Close" v-close-popup/>
-                        </q-popup-edit>
-                    </q-td>
-                    <q-td key="quantity" :props="ingredients">
-                        {{ ingredients.row.quantity }}
-                        <q-popup-edit v-model="ingredients.row.quantity" title="Update quantity" v-slot="scope">
-                          <q-input type="number" v-model="scope.value" dense autofocus />
-                          <q-btn flat color="primary" class="q-mt-md" label="Save" @click="updateQuantity(scope.value, ingredients.row.id)" v-close-popup/>
-                          <q-btn type="" flat color="primary" class="q-mt-md" label="Close" v-close-popup/>
-                        </q-popup-edit>
-                    </q-td>
-                    <q-td key="unit" :props="ingredients">
-                        <div class="text-pre-wrap">{{ ingredients.row.unit }}</div>
-                        <q-popup-edit v-model="ingredients.row.unit" title="Update units" v-slot="scope">
-                          <q-select :options='options' v-model="scope.value" dense autofocus />
-                          <q-btn flat color="primary" class="q-mt-md" label="Save" @click="updateUnit(scope.value, ingredients.row.id)" v-close-popup/>
-                          <q-btn type="" flat color="primary" class="q-mt-md" label="Close" v-close-popup/>
-                        </q-popup-edit>
-                    </q-td>
-                    <q-td key="caducity" :props="ingredients">{{ ingredients.row.caducity }}</q-td>
-
-                    <div style="margin-top: 10px; padding-bottom: 15px;" class="flex justify-center items-center">
-                      <q-btn
-                        
-                        color="red"
-                        glossy
-                        push
-                        @click="removeIngredient(ingredients.row.id)">
-                        <q-icon name='remove_circle_outline'></q-icon>
-                      </q-btn>
-                    </div>
-                </q-tr>
-            </template>
-        </q-table>
-
-    </div>
-
+    <q-table
+      :dense="$q.screen.lt.md"
+      title="Ingredients"
+      :rows="ingredients || []"
+      :columns="columns"
+      row-key="name"
+      :filter="filter"
+      :sort-method="customSort"
+      binary-state-sort
+    >
+      <template v-slot:body="ingredients">
+        <q-tr :props="ingredients">
+          <q-td key="name" :props="ingredients">
+              {{ ingredients.row.name }}
+              <q-popup-edit v-model="ingredients.row.name" title="Update name" v-slot="scope">
+                <q-input v-model="scope.value" dense autofocus counter />
+                <q-btn flat color="primary" class="q-mt-md" label="Save" @click="updateName(scope.value, ingredients.row.id)" v-close-popup/>
+                <q-btn type="" flat color="primary" class="q-mt-md" label="Close" v-close-popup/>
+              </q-popup-edit>
+          </q-td>
+          <q-td key="quantity" :props="ingredients">
+              {{ ingredients.row.quantity }}
+              <q-popup-edit v-model="ingredients.row.quantity" title="Update quantity" v-slot="scope">
+                <q-input type="number" v-model="scope.value" dense autofocus />
+                <q-btn flat color="primary" class="q-mt-md" label="Save" @click="updateQuantity(scope.value, ingredients.row.id)" v-close-popup/>
+                <q-btn type="" flat color="primary" class="q-mt-md" label="Close" v-close-popup/>
+              </q-popup-edit>
+          </q-td>
+          <q-td key="unit" :props="ingredients">
+              <div class="text-pre-wrap">{{ ingredients.row.unit }}</div>
+              <q-popup-edit v-model="ingredients.row.unit" title="Update units" v-slot="scope">
+                <q-select :options='options' v-model="scope.value" dense autofocus />
+                <q-btn flat color="primary" class="q-mt-md" label="Save" @click="updateUnit(scope.value, ingredients.row.id)" v-close-popup/>
+                <q-btn type="" flat color="primary" class="q-mt-md" label="Close" v-close-popup/>
+              </q-popup-edit>
+          </q-td>
+          <q-td key="caducity" :props="ingredients">{{ ingredients.row.caducity }}</q-td>
+          <div style="margin-top: 10px; padding-bottom: 10px;" class="flex justify-center items-center">
+            <q-btn
+              push
+              glossy
+              color="red"
+              class="q-pa-sm desktop-only"
+              @click="removeIngredient(ingredients.row.id)"
+              >
+              <q-icon name='remove_circle_outline'></q-icon>
+            </q-btn>
+            <q-btn
+              class="q-pa-none q-mr-sm mobile-only"
+              size="md"
+              flat
+              @click="removeIngredient(ingredients.row.id)"
+              >
+              <q-icon name='remove_circle_outline' color="red"></q-icon>
+            </q-btn>
+          </div>
+        </q-tr>
+      </template>
+    </q-table>
+  </div>
 </template>
 
 <script>
