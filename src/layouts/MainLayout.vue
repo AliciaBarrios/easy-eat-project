@@ -23,7 +23,7 @@
       align="justify"
       class="bg-primary text-white desktop-only"
       :breakpoint="0"
-      v-if="$q.platform.is.desktop"
+      v-if="$q.screen.gt.md"
       >
         <q-route-tab :to="{ name: 'menu'}" label="Menu" />
         <q-route-tab :to="{ name: 'despensa'}" label="Despensa" />
@@ -69,8 +69,8 @@
       <router-view />
     </q-page-container>
 
-    <q-footer v-if="$q.platform.is.mobile">
-      <q-tabs    
+    <q-footer v-if="$q.screen.xs">
+      <q-tabs
       v-model="tab"
       dense
       align="justify"

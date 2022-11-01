@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header reveal elevated color="secondary">
+    <q-header elevated color="secondary">
       <div class="flex column flex-center q-pa-md" >
         <q-img src="../assets/easy-eat-logo-white-tenedor.png" id="logo"/>
         <p class="text-italic q-pt-md">Everything starts in your pantry</p>
@@ -11,7 +11,7 @@
         align="justify"
         class="bg-primary text-white"
         :breakpoint="0"
-        v-if="$q.platform.is.desktop"
+        v-if="$q.screen.gt.md"
         >
           <q-route-tab :to="{ name: 'landing'}" label="ABOUT US" />
           <q-route-tab :to="{ name: 'signup'}" label="SIGN UP" />
@@ -30,7 +30,7 @@
         align="justify"
         class="bg-primary text-white"
         :breakpoint="0"
-        v-if="$q.platform.is.mobile"
+        v-if="$q.screen.xs"
         >
           <q-route-tab :to="{ name: 'landing'}" label="ABOUT US" />
           <q-route-tab :to="{ name: 'signup'}" label="SIGN UP" />

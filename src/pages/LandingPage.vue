@@ -24,11 +24,11 @@
     <h4 class="text-center q-mb-md">EasyEat is going to make it a little easier for you. </h4>
     <h4 class="text-center q-mt-md">With EasyEat you can manage and organise everything related to the daily menu in a very simple way. </h4>
     
-    <q-list class="flex-center row">
+    <q-list class="flex-center row justify-around">
         <div class="container q-ma-xl">
-            <q-item class="flex-center column">
+            <q-item class="full-height flex column content-start">
                 <q-item-section>
-                    <q-icon name="fastfood" size="xl"/>
+                    <q-icon name="fastfood" size="6rem"/>
                 </q-item-section>
                 <q-item-section>
                     We provide you with a "Pantry" section where you can enter and manage the food you have at home.
@@ -36,10 +36,10 @@
             </q-item>
         </div>
       
-        <div class="container">
-            <q-item class="flex-center column">
+        <div class="container q-ma-xl">
+            <q-item class="full-height flex column justify-start">
                 <q-item-section>
-                    <q-icon name="menu_book" size="xl"/>
+                    <q-icon name="menu_book" size="6rem"/>
                 </q-item-section>
                 <q-item-section>
                     A "Recipe book" section, where you can search for recipes that contain a specific food and which 
@@ -48,10 +48,10 @@
                 </q-item-section>
             </q-item>
         </div>
-        <div class="container">
-            <q-item class="flex-center column">
+        <div class="container q-ma-xl">
+            <q-item class="full-height flex column justify-start">
                 <q-item-section>
-                    <q-icon name="restaurant_menu" size="xl"/>
+                    <q-icon name="restaurant_menu" size="6rem"/>
                 </q-item-section>
                 <q-item-section>
                     And finally, the "Menu" section where you can manage what to eat and which will be displayed weekly. 
@@ -79,5 +79,6 @@
 
     .container {
         width: 20%;
+        height: 300px;
     }
 </style>

@@ -39,21 +39,13 @@
           <q-td key="caducity" :props="ingredients">{{ ingredients.row.caducity }}</q-td>
           <div style="margin-top: 10px; padding-bottom: 10px;" class="flex justify-center items-center">
             <q-btn
-              push
-              glossy
-              color="red"
-              class="q-pa-sm desktop-only"
+              :glossy="$q.screen.gt.md"
+              :flat="$q.screen.xs"
+              class="button"
+              size="md"
               @click="removeIngredient(ingredients.row.id)"
               >
               <q-icon name='remove_circle_outline'></q-icon>
-            </q-btn>
-            <q-btn
-              class="q-pa-none q-mr-sm mobile-only"
-              size="md"
-              flat
-              @click="removeIngredient(ingredients.row.id)"
-              >
-              <q-icon name='remove_circle_outline' color="red"></q-icon>
             </q-btn>
           </div>
         </q-tr>
@@ -174,3 +166,20 @@ export default defineComponent({
       }
     });
 </script>
+
+<style scoped>
+  @media only screen and (max-width: 600px) {
+    .button {
+    color: red;
+    padding: 0;
+    margin-right: 0.5rem;
+    }
+  }
+
+  @media only screen and (min-width: 601px) {
+    .button {
+    background-color: rgb(243, 28, 28);
+    color: white;
+    }
+  }
+</style>
