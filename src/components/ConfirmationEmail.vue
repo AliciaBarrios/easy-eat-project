@@ -38,10 +38,10 @@
     }
   }
 
-  @media only screen and (min-width: 601px) {
+  /* @media only screen and (min-width: 601px) {
     .display-mobile {
       display: none;
     }
-  }
+  } */
 
 </style>
