@@ -1,47 +1,21 @@
 <template>
-    <div class="container">
-        <q-card 
-        v-for="(recipe, index) in recipes" 
-        :key="index" 
-        class="q-ma-sm card-width" 
-        style="height:max-content;"
-        >
-            <q-card-section>
-                <span>Title:</span> {{ recipe.title }}
-            </q-card-section>
-            <q-card-section>
-                <span>Ingredients:</span>
-                <q-list 
-                v-for="(ingredient, index) in recipe.ingredients" 
-                :key="index" 
-                style="max-height:30px"
-                >
-                    <q-item> {{ ingredient }} </q-item>
-                </q-list>
-            </q-card-section>
-            <q-card-section >
-                <span>Steps:</span>
-                <q-list v-for="(step, index) in recipe.steps" :key="index">
-                    <q-item> {{ index + 1}}. {{ step }} </q-item>
-                </q-list>
-            </q-card-section>
-        </q-card>
-    </div>
-   
-
- <!-- <div class="q-pa-md">
+ <div class="q-pa-md">
       <q-table
         :dense="$q.screen.lt.md"
         title="Recipes"
         :rows="recipes || []"
         :columns="columns"
-        row-key="name"
+        row-key="title"
         :filter="filter"
         :sort-method="customSort"
         binary-state-sort
       >
         <template v-slot:body="recipes">
           <q-tr :props="recipes">
+            <q-td auto-width>
+              <q-btn size="sm" color="primary" round dense @click="recipes.expand = !recipes.expand" :icon="recipes.expand ? 'remove' : 'add'" />
+            </q-td>
+
             <q-td key="title" :props="recipes">
                 {{ recipes.row.title }}
                 <q-popup-edit v-model="recipes.row.title" title="Update title" v-slot="scope">
@@ -51,24 +25,20 @@
                 </q-popup-edit>
             </q-td>
             
-            <q-td key="ingredients" :props="recipes">
-                <q-list v-for="(ingredient, index) in recipes.row.ingredients" :key="index" class="flex row">
-                    <q-item>{{ index + 1 }}. {{ ingredient }}</q-item>
-                </q-list>
-                <q-popup-edit v-model="recipes.row.ingredients" title="Update ingredients" v-slot="scope">
-                <q-input type="number" v-model="scope.value" dense autofocus />
-                <q-btn flat color="primary" class="q-mt-md" label="Save" @click="updateIngredients(scope.value, recipes.row.id)" v-close-popup/>
-                <q-btn type="" flat color="primary" class="q-mt-md" label="Close" v-close-popup/>
+            <q-td key="cook_time" :props="recipes">
+                {{ recipes.row.cook_time }}
+                <q-popup-edit v-model="recipes.row.cook_time" title="Update Cook Time" v-slot="scope">
+                  <q-input v-model="scope.value" dense autofocus counter />
+                  <q-btn flat color="primary" class="q-mt-md" label="Save" @click="updateCookTime(scope.value, recipes.row.id)" v-close-popup/>
+                  <q-btn type="" flat color="primary" class="q-mt-md" label="Close" v-close-popup/>
                 </q-popup-edit>
             </q-td>
-            
-            <q-td key="steps" :props="recipes">
-                <q-list v-for="(step, index) in recipes.row.steps" :key="index">
-                    <q-item>{{ index + 1 }}. {{ step }}</q-item>
-                </q-list>
-                <q-popup-edit v-model="recipes.row.steps" title="Update steps" v-slot="scope">
-                  <q-select v-model="scope.value" dense autofocus />
-                  <q-btn flat color="primary" class="q-mt-md" label="Save" @click="updateSteps(scope.value, recipes.row.id)" v-close-popup/>
+
+            <q-td key="rate" :props="recipes">
+                {{ recipes.row.rate }}
+                <q-popup-edit v-model="recipes.row.rate" title="Update rate" v-slot="scope">
+                  <q-input v-model="scope.value" dense autofocus counter />
+                  <q-btn flat color="primary" class="q-mt-md" label="Save" @click="updateRate(scope.value, recipes.row.id)" v-close-popup/>
                   <q-btn type="" flat color="primary" class="q-mt-md" label="Close" v-close-popup/>
                 </q-popup-edit>
             </q-td>
@@ -85,9 +55,44 @@
               </q-btn>
             </div>
           </q-tr>
+
+          <q-tr v-show="recipes.expand" :props="recipes">
+            <q-td colspan="100%">
+              <div class="container">
+                <q-card 
+                class="q-ma-sm card-width" 
+                style="height:max-content;"
+                >
+                  <q-card-section>
+                    <q-item-label 
+                    overline 
+                    class="text-center text-primary"
+                    >
+                    {{ recipes.row.title }}
+                  </q-item-label>
+
+                  </q-card-section>
+
+                  <q-separator spaced />
+                  <q-card-section>
+                      <span :props="recipes" class="text-primary">Ingredients:</span>
+                      <q-list padding v-for="(ingredient, index) in recipes.row.ingredients" :key="index" class="flex row">
+                        <q-item-label>{{ index + 1 }}. {{ ingredient }}</q-item-label>
+                      </q-list>
+                  </q-card-section>
+                  <q-card-section style="max-width: 350px">
+                      <span :props="recipes" class="text-primary">Steps:</span>
+                      <q-list v-for="(step, index) in recipes.row.steps" :key="index">
+                        <q-item-label style="width:max-content">{{ index + 1 }}. {{ step }}</q-item-label>
+                      </q-list>
+                  </q-card-section>
+                </q-card>
+              </div>
+            </q-td>
+          </q-tr>
         </template>
       </q-table>
-    </div>  -->
+    </div> 
  
   </template>
   
@@ -101,6 +106,7 @@
   const { recipes } = storeToRefs(recipeStore);
   
   const columns = [
+    { name: '', align: 'center', label: 'Full Recipe', field: ''},
     {
       name: 'title',
       required: true,
@@ -110,8 +116,8 @@
       format: val => `${val}`,
       sortable: true
     },
-    { name: 'ingredients', align: 'center', label: 'Ingredients', field: 'ingredients', sortable: true },
-    { name: 'steps', align: 'left', label: 'Steps', field: 'steps', sortable: true },
+    { name: 'cook_time', align: 'center', label: 'Cook Time', field: 'cook_time', sortable: true },
+    { name: 'rate', align: 'center', label: 'Rate', field: 'rate', sortable: true },
   ]
   
   export default defineComponent({
@@ -147,8 +153,8 @@
   
           const removeRecipe = async(recipeId) => {
             try {
-              await recipeStore.deleteIngredient(recipeId);
-              await recipeStore.fetchIngredients();
+              await recipeStore.deleteRecipe(recipeId);
+              await recipeStore.fetchRecipes();
             } catch (error) {
               console.log('error', error);
             }
@@ -156,42 +162,41 @@
   
           const updateTitle = async(newItem, recipeId) => {
             try {
-              await recipeStore.updateNameIngredient(newItem, recipeId);
-              await recipeStore.fetchIngredients();
+              await recipeStore.updateTitleRecipe(newItem, recipeId);
+              await recipeStore.fetchRecipes();
             } catch (error) {
               console.log('error', error);
             }
           }
   
-          const updateIngredients = async(newItem, recipeId) => {
+          const updateCookTime = async(newItem, recipeId) => {
             try {
-              await recipeStore.updateQuantityIngredient(newItem, recipeId);
-              await recipeStore.fetchIngredients();
+              await recipeStore.updateCookTimeRecipe(newItem, recipeId);
+              await recipeStore.fetchRecipes();
             } catch (error) {
               console.log('error', error);
             }
           }
   
-          const updateSteps = async(newItem, recipeId) => {
+          const updateRate = async(newItem, recipeId) => {
             try {
-              await recipeStore.updateUnitIngredient(newItem, recipeId);
-              await recipeStore.fetchIngredients();
+              await recipeStore.updateRateRecipe(newItem, recipeId);
+              await recipeStore.fetchRecipes();
             } catch (error) {
               console.log('error', error);
             }
           }
   
-          console.log('ingredients2:', recipes);
+          console.log('recipes2:', recipes);
   
           return {
             columns,
-            // rows: reactive(rows),
             recipes,
             customSort,
             removeRecipe,
             updateTitle,
-            updateIngredients,
-            updateSteps
+            updateCookTime,
+            updateRate
           }
         }
       });
@@ -214,10 +219,10 @@
       background-color: rgb(243, 28, 28);
       color: white;
       }
-      .card-width{
-        width: 30%;
-      }
     }
+    .card-width{
+        width: 90%;
+      }
     .container {
         display: flex;
         flex-direction: row;

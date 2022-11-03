@@ -1,18 +1,18 @@
 <template>
     <div class="flex row justify-around q-mt-xl" v-if="$q.screen.gt.md">
-        <q-card class="container flex justify-center items-end margin-cards">
+        <q-card class="container-card flex justify-center items-end margin-cards">
             <q-card-section>
                 <div class="text-h6 text-center">What are we eating today?</div>
             </q-card-section>
             <q-img src="../assets/comida.jpg" style="height: 250px;"/>
         </q-card>
-        <q-card class="container flex justify-center items-start margin-cards">
+        <q-card class="container-card flex justify-center items-start margin-cards">
             <q-img src="../assets/calendario.jpg" />
             <q-card-section>
                 <div class="text-h6 text-center">It's the end of the month and it's time to do the monthly shopping again?</div>
             </q-card-section>
         </q-card>
-        <q-card class="container flex justify-center items-end margin-cards">
+        <q-card class="container-card flex justify-center items-end margin-cards">
             <q-card-section>
                 <div class="text-h6 text-center">Oh, man! Now I can't remember if we have any milk left at home.</div>
             </q-card-section>
@@ -34,7 +34,7 @@
     v-if="$q.screen.lt.md"
     >
         <q-carousel-slide :name="1" class="flex-center column">
-            <q-card class="container flex justify-center items-end margin-cards">
+            <q-card class="container-card flex justify-center items-end margin-cards">
                 <q-card-section>
                     <div class="text-h6 text-center">What are we eating today?</div>
                 </q-card-section>
@@ -42,7 +42,7 @@
             </q-card>
         </q-carousel-slide>
         <q-carousel-slide :name="2" class="flex-center column">
-            <q-card class="container flex justify-center items-start margin-cards">
+            <q-card class="container-card flex justify-center items-start margin-cards">
                 <q-img src="../assets/calendario.jpg" />
                 <q-card-section>
                     <div class="text-h6 text-center">It's the end of the month and it's time to do the monthly shopping again?</div>
@@ -50,7 +50,7 @@
             </q-card>
         </q-carousel-slide>
         <q-carousel-slide :name="3" class="flex-center column">
-            <q-card class="container flex justify-center items-end margin-cards">
+            <q-card class="container-card flex justify-center items-end margin-cards">
                 <q-card-section>
                     <div class="text-h6 text-center">Oh, man! Now I can't remember if we have any milk left at home.</div>
                 </q-card-section>
@@ -60,12 +60,40 @@
     </q-carousel>
 
 
-    <h3 class="text-center text-grey-6">Feels familiar?</h3>
-    <h4 class="text-center q-mb-md">EasyEat is going to make it a little easier for you. </h4>
-    <h4 class="text-center q-mt-md">With EasyEat you can manage and organise everything related to the daily menu in a very simple way. </h4>
+    <h3 class="text-center text-grey-6" style="margin: 5rem 0">Feels familiar?</h3>
+    <div class="container-text">
+        <h4 class="text-center" style="line-height: 3rem;">EasyEat is going to make it a little easier for you. </h4>
+        <div class="flex row justify-around items-center">
+            <div class="text-center width">
+                <q-list class="flex column items-center phrases">
+                    <h5 style="line-height: 3rem;">With EasyEat you can manage and organise everything related to the daily menu in a very simple way. You can do this from your:</h5>
+                    <q-item class="flex-center">
+                        <q-icon name="phone_android" />
+                        <q-item-section class="flex content-start q-pl-md" style="width:6rem;">
+                            Phone
+                        </q-item-section>
+                    </q-item>
+                    <q-item class="flex-center">
+                        <q-icon name="tablet_android"/>
+                        <q-item-section class="flex content-start q-pl-md" style="width:6rem;">
+                            Tablet
+                        </q-item-section>
+                    </q-item>       
+                    <q-item class="flex-center">
+                        <q-icon name="laptop_mac" />
+                        <q-item-section class="flex content-start q-pl-md" style="width:6rem;">
+                            Laptop
+                        </q-item-section>
+                    </q-item>   
+                </q-list> 
+            </div>
+            <q-img src="https://cdn.quonomy.com/3845/conversions/como-encender-tu-movil-android-tocando-la-pantalla-h-lg.jpg" style="width: 600px; height: auto; margin-top: 3rem;" alt="persona tocando pantalla" />
+        </div>
+    </div>
+   
     
     <q-list class="display bg-green-1 q-pt-xl q-pb-xl">
-        <div class="container">
+        <div class="container-card">
             <q-item class="full-height flex-center column">
                 <q-item-section>
                     <q-icon name="fastfood" size="6rem" color="grey-6"/>
@@ -76,7 +104,7 @@
             </q-item>
         </div>
       
-        <div class="container">
+        <div class="container-card">
             <q-item class="full-height flex-center column">
                 <q-item-section>
                     <q-icon name="menu_book" size="6rem" color="grey-6"/>
@@ -88,7 +116,7 @@
                 </q-item-section>
             </q-item>
         </div>
-        <div class="container">
+        <div class="container-card">
             <q-item class="full-height flex-center column">
                 <q-item-section>
                     <q-icon name="restaurant_menu" size="6rem" color="grey-6"/>
@@ -147,6 +175,15 @@
     }
 
     @media only screen and (max-width: 600px) {
+        .container-text {
+            width: 90%;
+            margin: 10rem auto;
+        }
+        .phrases {
+            font-size: 1.2rem;
+            line-height: 2rem;
+            text-align: justify;
+        }
         img {
             width: 100vw;
             height: auto;
@@ -157,7 +194,7 @@
             text-align: center;
             line-height: 3rem;
         }
-        .container {
+        .container-card {
             width: 80%;
             height: auto;
             text-align: justify;
@@ -180,6 +217,16 @@
     }
 
     @media only screen and (min-width: 601px) {
+        .container-text {
+            width: 80%;
+            margin: 10rem auto;
+        }
+        .phrases {
+            font-size: 1.5rem;
+            line-height: 2rem;
+            text-align: justify;
+        }
+
         img {
             width: 600px;
             height: auto;
@@ -190,7 +237,7 @@
             text-align: center;
             line-height: 3rem;
         }
-        .container {
+        .container-card {
             width: 25%;
             height: 400px;
         }

@@ -1,18 +1,18 @@
 <template>
   <q-page padding>
       <h2>Recipes</h2>
-      <HeadPantry @filterEmit='sendInfo'/>
+      <HeadRecipes @filterEmit='sendInfo'/>
       <TableRecipes :filter='info'/>
     </q-page>
 </template>
 
 <script>
-  import HeadPantry from '../components/HeadPantry.vue'
+  import HeadRecipes from '../components/HeadRecipes.vue'
   import TableRecipes from '../components/TableRecipes.vue'
   import { defineComponent, ref } from 'vue'
   
   export default defineComponent({
-    components: { HeadPantry, TableRecipes },
+    components: { HeadRecipes, TableRecipes },
 
     setup() {
       const info = ref('');

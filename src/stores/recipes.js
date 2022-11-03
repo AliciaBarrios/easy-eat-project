@@ -15,7 +15,7 @@ export const useRecipesStore = defineStore('recipes', {
       // console.log("ingredients:", this.ingredients);
     },
 
-    async insertRecipe (title, ingredients, steps) {
+    async insertRecipe (user, title, ingredients, steps) {
       const { data: recipes, error } = await supabase
         .from('recipes')
         .insert([
@@ -44,19 +44,19 @@ export const useRecipesStore = defineStore('recipes', {
       this.recipes = recipes;
     },
 
-    async updateIngredientsRecipe (newItem, id) {
+    async updateCookTimeRecipe (newItem, id) {
       const { data: recipes, error } = await supabase
         .from('recipes')
-        .update({ ingredients: newItem })
+        .update({ cook_time: newItem })
         .eq('id', id)
       if (error) throw error;
       this.recipes = recipes;
     },
 
-    async updateStepsRecipe (newItem, id) {
+    async updateRateRecipe (newItem, id) {
       const { data: recipes, error } = await supabase
         .from('recipes')
-        .update({ steps: newItem })
+        .update({ rate: newItem })
         .eq('id', id)
       if (error) throw error;
       this.recipes = recipes;

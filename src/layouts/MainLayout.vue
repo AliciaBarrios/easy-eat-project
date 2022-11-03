@@ -78,8 +78,8 @@
       :breakpoint="0"
       >
         <q-route-tab :to="{ name: 'menu'}" icon="restaurant" label="Menu" />
-        <q-route-tab :to="{ name: 'despensa'}" icon="icecream" label="Despensa" />
-        <q-route-tab :to="{ name: 'recetario'}" icon="menu_book" label="Recetario" />
+        <q-route-tab :to="{ name: 'despensa'}" icon="icecream" label="Pantry" />
+        <q-route-tab :to="{ name: 'recetario'}" icon="menu_book" label="Recipes" />
       </q-tabs>
     </q-footer>
   </q-layout>
