@@ -10,7 +10,7 @@
         <q-btn dense round flat @click="toggleRightDrawer">
           <q-avatar size="150px">
             <div class="container-img">
-                <img src="../assets/ali.jpg" alt="User image" id="user-img">
+                <q-icon name="account_circle" />
             </div>
           </q-avatar>
           <q-tooltip>Account</q-tooltip>
@@ -26,8 +26,8 @@
       v-if="$q.screen.gt.xs"
       >
         <q-route-tab :to="{ name: 'menu'}" label="Menu" />
-        <q-route-tab :to="{ name: 'despensa'}" label="Despensa" />
-        <q-route-tab :to="{ name: 'recetario'}" label="Recetario" />
+        <q-route-tab :to="{ name: 'despensa'}" label="Pantry" />
+        <q-route-tab :to="{ name: 'recetario'}" label="Recipes" />
       </q-tabs>
     </q-header>
   
@@ -39,7 +39,7 @@
           </q-item-section>
 
           <q-item-section>
-              Perfil
+              Profile
           </q-item-section>
         </q-item>
 
@@ -49,7 +49,7 @@
           </q-item-section>
 
           <q-item-section>
-              Idioma
+              Language
           </q-item-section>
         </q-item>
 

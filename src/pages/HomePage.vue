@@ -1,7 +1,7 @@
 <template>
-    <q-page padding>
+    <q-page padding class="bg-image">
         <h2>Hello *User*</h2>
-        <div class="flex column items-center">
+        <div class="flex column items-center bg-div">
           <h4 
           class="text-weight-light text-center" 
           style="width:70%;"
@@ -88,3 +88,18 @@ export default defineComponent({
 
 });
 </script>
+
+<style>
+  .bg-image {
+    background-image: url(https://www.ringtina.com.ar/Descargar/Fondos%20de%20Pantalla/Abstractos/ImgAbstractos%20102.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom right;
+  }
+
+  .bg-div {
+    background-color: rgba(246, 243, 243, 0.425);
+    padding-bottom: 3rem;
+    border-radius: 30px;
+  }
+</style>
