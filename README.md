@@ -2,7 +2,7 @@
 
 EasyEat es una aplicación que te ayuda a gestionar y organizar todo lo relacionado con el menu diario de una manera rápida y sencilla.
 
-## Tecnologías utilizadas
+## Tecnologías utilizadas ⚙️
 
 | Herramienta   |  Descripción                                     |
 | ------------- | -------------                                    |
