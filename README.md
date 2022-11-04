@@ -26,7 +26,7 @@ EasyEat es una aplicación que te ayuda a gestionar y organizar todo lo relacion
 
   <img width="752" alt="image" src="https://user-images.githubusercontent.com/94490550/200083123-dc536b59-2387-4a63-a584-7cb5c7ff2c03.png">
 
-- Las funcionalidades de Settings y Profile estan en :construction: construcción :construction: 
+- Las funcionalidades de Language y Profile estan en :construction: construcción :construction: 
 
 - `Home Page`: Desde esta vista podemos generar una receta aleatoria, nos ahorra pensar que comer hoy...
 
