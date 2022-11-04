@@ -1,5 +1,5 @@
 <template>
-    <div class="flex row justify-around q-mt-xl" v-if="$q.screen.gt.md">
+    <div class="flex row justify-around q-mt-xl" v-if="$q.screen.gt.xs">
         <q-card class="container-card flex justify-center items-end margin-cards">
             <q-card-section>
                 <div class="text-h6 text-center">What are we eating today?</div>
@@ -31,7 +31,7 @@
     infinite
     height="500px"
     control-color="primary"
-    v-if="$q.screen.lt.md"
+    v-if="$q.screen.lt.sm"
     >
         <q-carousel-slide :name="1" class="flex-center column">
             <q-card class="container-card flex justify-center items-end margin-cards">

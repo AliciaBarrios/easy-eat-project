@@ -4,19 +4,7 @@
         <h6 class="q-mb-lg q-mt-sm">New recipe</h6>
         <div class="flex row justify-between">  
           <q-input v-model="row.title" label="Title" style="width: 45%;"/>
-          <q-input v-model="row.ingredients" label="Ingredients" style="width: 45%;"> 
-            <!-- <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                  <q-date v-model="row.caducity">
-                    <div class="row items-center justify-end">
-                      <q-btn v-close-popup label="Done" color="primary" flat />
-                    </div>
-                  </q-date>
-                </q-popup-proxy>
-              </q-icon>
-            </template> -->
-          </q-input>
+          <q-input v-model="row.ingredients" label="Ingredients" style="width: 45%;"/> 
           <q-input v-model="row.steps" label="Steps" style="width: 45%;"/>
         </div>
         <q-btn class="full-width q-mt-lg" color="primary" @click="onAddClick">Add</q-btn>
@@ -25,7 +13,7 @@
 </template>
 
 <script>
-  import { reactive } from 'vue'
+  import { reactive, ref } from 'vue'
   import { defineComponent } from 'vue'
   import { useDialogPluginComponent } from 'quasar'
   import { useRecipesStore } from '../stores/recipes'
@@ -42,13 +30,12 @@
     ],
 
     setup() {
+
       const row = reactive({
         title: '',
         ingredients: '',
         steps: '',
       });
-
-      
 
       const recipeStore = useRecipesStore();
       const { recipes } = storeToRefs(recipeStore);
@@ -77,7 +64,7 @@
         onAddClick,
         newRecipe,
         recipes,
-        user,
+        user
       }
     },
   });
