@@ -47,20 +47,3 @@ EasyEat es una aplicación que te ayuda a gestionar y organizar todo lo relacion
   <img width="656" alt="image" src="https://user-images.githubusercontent.com/94490550/200082505-f3b687f2-6ad8-44fb-a20f-4b6a027dc730.png">
 
 Hecho con mucho ❤️ por [AliciaBarrios](https://github.com/AliciaBarrios)
-
-### Format the files
-```bash
-yarn format
-# or
-npm run format
-```
-
-
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
