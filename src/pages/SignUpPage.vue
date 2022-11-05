@@ -189,7 +189,7 @@
               // redirect them to logout if the user is not there
               // router.push({ path: '/' });
               await userStore.signUp(email.value, password.value);
-             
+            
               $q.notify({
                 color: 'green-4',
                 textColor: 'white',

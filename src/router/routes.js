@@ -9,6 +9,11 @@ const routes = [
     ]
   },
   {
+    path: '/construction', 
+    name: 'construction', 
+    component: () => import('src/pages/UnderConstructionPage.vue'),
+  },
+  {
     path: '/confirmation', 
     name: 'confirmation', 
     component: () => import('src/components/ConfirmationEmail.vue'),

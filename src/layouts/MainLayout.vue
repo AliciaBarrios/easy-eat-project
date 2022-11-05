@@ -33,7 +33,7 @@
   
     <q-drawer v-model="rightDrawerOpen" side="right" behavior="mobile" elevated>
       <q-list class="q-pt-xl">
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple :to="{ name: 'construction' }">
           <q-item-section avatar>
               <q-icon name="manage_accounts" />
           </q-item-section>
@@ -43,7 +43,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple :to="{ name: 'construction' }">
           <q-item-section avatar>
               <q-icon name="language" />
           </q-item-section>

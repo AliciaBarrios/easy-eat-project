@@ -1,6 +1,6 @@
 <template>
     <q-page padding class="bg-image">
-        <h2>Hello *User*</h2>
+        <h2>Hello EasyEater</h2>
         <div class="flex column items-center bg-div">
           <h4 
           class="text-weight-light text-center" 

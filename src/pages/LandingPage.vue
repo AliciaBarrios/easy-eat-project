@@ -135,9 +135,9 @@
     </div>
 
     <div class="bg-grey-4 footer" >
-        <q-item :to="{ name: 'contact' }" class="text-grey-8 link">Contact us</q-item>
-        <q-item :to="{ name: 'work' }" class="text-grey-8 link">Work with us</q-item>
-        <q-item :to="{ name: 'faqs' }" class="text-grey-8 link">FAQs</q-item>
+        <q-item :to="{ name: 'construction' }" class="text-grey-8 link">Contact us</q-item>
+        <q-item :to="{ name: 'construction' }" class="text-grey-8 link">Work with us</q-item>
+        <q-item :to="{ name: 'construction' }" class="text-grey-8 link">FAQs</q-item>
     </div>
 
 </template>

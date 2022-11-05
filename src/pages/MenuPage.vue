@@ -48,7 +48,7 @@ export default defineComponent({
   setup () {
     return {
       splitterModel: ref(50),
-      date: ('2022/11/05'),
+      date: ref('2022/11/05'),
       events: [ '2022/11/05', '2022/11/06', '2022/11/07' ]
     }
   }
