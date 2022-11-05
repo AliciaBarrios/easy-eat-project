@@ -13,6 +13,11 @@ EasyEat es una aplicación que te ayuda a gestionar y organizar todo lo relacion
 | Supabase      | Base de datos relacional                         |
 | Netlify       | Página web utilizada para el Deploy del proyecto |
 
+## Usuario para pruebas ☕️
+
+- `Correo`: alisia.6@hotmail.com
+- `Contraseña`: Pasteldefresa6!
+
 ## Funcionalidades del proyecto :hammer:
 - `SignUp`: Desde esta vista puedes registrarte como usuario:
 
