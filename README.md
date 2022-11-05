@@ -4,14 +4,14 @@ EasyEat es una aplicación que te ayuda a gestionar y organizar todo lo relacion
 
 ## Tecnologías utilizadas ⚙️
 
-| Herramienta   |  Descripción                                     |
-| ------------- | -------------                                    |
-| Vue           | El Framework web usado                           |
-| Pinia         | Gestor de estados                                |
-| Quasar        | El Framework CSS usado                           | 
-| JavaScript    | Lenguaje programación Front-end                  |
-| Supabase      | Base de datos relacional                         |
-| Netlify       | Página web utilizada para el Deploy del proyecto |
+| Herramienta                                                        |  Descripción                    |
+| -------------                                                      | -------------                   |
+| [Vue](https://vuejs.org/)                                          | El Framework web usado          |
+| [Pinia](https://pinia.vuejs.org/)                                  | Gestor de estados               |
+| [Quasar](https://quasar.dev/)                                      | El Framework CSS usado          | 
+| [JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript) | Lenguaje programación Front-end |
+| [Supabase](https://supabase.com/)                                  | Base de datos relacional        |
+| [Netlify](https://www.netlify.com/)               | Página web utilizada para el Deploy del proyecto |
 
 ## Usuario para pruebas ☕️
 
