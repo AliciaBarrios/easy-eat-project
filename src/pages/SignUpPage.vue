@@ -109,7 +109,7 @@
         <div class="flex column flex-center">
           <q-btn label="Sign Up" type="submit" color="primary" class="q-mb-md"/>
           <q-item-label>Already have an Account?</q-item-label>
-          <q-item clickable class="text-primary text-" :to="{ name: 'authentication' }" >Sign In</q-item>
+          <q-item clickable class="text-primary text-" :to="{ name: 'signin' }" >Sign In</q-item>
         </div>
       </q-form>
     </div>
